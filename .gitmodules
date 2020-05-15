@@ -1,0 +1,14 @@
+[submodule "ccx"]
+	path = ccx
+	url = https://github.com/ISCPC/CalculiX-ccx.git
+[submodule "lib/ARPACK"]
+	path = lib/ARPACK
+	url = https://github.com/ISCPC/ARPACK.git
+	branch = intel
+[submodule "lib/SPOOLES"]
+	path = lib/SPOOLES
+	url = https://github.com/ISCPC/SPOOLES.git
+	branch = gcc
+[submodule "lib/exodus"]
+	path = lib/exodus
+	url = https://github.com/certik/exodus.git
