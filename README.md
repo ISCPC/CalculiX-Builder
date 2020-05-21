@@ -18,6 +18,10 @@ Intelの公式サイトの手順にてインストールする。
 % sudo apt install libexodusii5 bexodusii-dev
 ```
 - CentOS: CentOSが提供するExodusパッケージにはlibexodus.soが含まれないため、別途ビルドが必要  
+```
+% sudo yum install epel-release
+% sudo yum install exodusii exodusii-devel
+```
 
 ### 2. submoduleソースの取得
 パッチのベースとなるccx 及び前提ライブラリ(ARPACK, SPOOLES)のソースを取得します。

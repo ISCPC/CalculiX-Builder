@@ -1,8 +1,8 @@
 diff --git a/src/Makefile_MT b/src/Makefile_MT
-index 9e7d1db..1fba6b8 100755
+index 9e7d1db..9f064cb 100755
 --- a/src/Makefile_MT
 +++ b/src/Makefile_MT
-@@ -1,10 +1,68 @@
+@@ -1,10 +1,75 @@
 +# Note that in order to run PARDISO with Multithreading, 
 +# the environment variable OMP_NUM_THREADS needs to be set to
 +# the desired number of cpus, before compiling and before running ccx
@@ -18,6 +18,7 @@ index 9e7d1db..1fba6b8 100755
 -CC=cc
 +WITH_EXODUSII = false
 +WITH_MKL = true
++WITH_MKL_STATIC = false
 +WITH_AURORA = false
 +
 +OPT = -O2
@@ -56,13 +57,19 @@ index 9e7d1db..1fba6b8 100755
 +endif
 +
 +#INTEL MKL
-+# For static link version
 +ifeq ($(WITH_MKL),true)
 +	CFLAGS += -DPARDISO
++ifeq ($(WITH_MKL_STATIC),true)
++	# For static link version
 +	INTEL_LIB = /opt/intel/lib/intel64_lin
 +	MKL_LIB = /opt/intel/mkl/lib/intel64
 +	MKL_INCLUDE = /opt/intel/mkl/include
 +	CMPLR_PATH = /opt/intel/compilers_and_libraries/linux/lib/intel64
++else
++	# For dynamic link version
++	LDFLAGS += -L/opt/intel/lib/intel64 -L/opt/intel/mkl/lib/intel64
++	LDFLAGS += -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -liomp5
++endif
 +endif
 +
 +# SX-AURORA HeteroSolver
@@ -74,7 +81,7 @@ index 9e7d1db..1fba6b8 100755
  .c.o :
  	$(CC) $(CFLAGS) -c $<
  .f.o :
-@@ -18,17 +76,34 @@ OCCXF = $(SCCXF:.f=.o)
+@@ -18,17 +83,34 @@ OCCXF = $(SCCXF:.f=.o)
  OCCXC = $(SCCXC:.c=.o)
  OCCXMAIN = $(SCCXMAIN:.c=.o)
  
@@ -98,7 +105,7 @@ index 9e7d1db..1fba6b8 100755
 +	./date.pl; $(CC) $(CFLAGS) -c $(SCCXMAIN)
 +	
 +ccx_2.16_MT: $(OCCXMAIN) ccx_2.16.a $(LIBS)
-+ifeq ($(WITH_MKL),true)
++ifeq ($(WITH_MKL_STATIC),true)
 +	$(FC) $(FFLAGS) -o $@ $(FPPSTOP) $(OCCXMAIN) ccx_2.16.a $(LDFLAGS) $(LIBS) \
 +	-Wl,--start-group \
 +	$(INTEL_LIB)/libiomp5.a \
