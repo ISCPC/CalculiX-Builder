@@ -1,128 +1,33 @@
 diff --git a/src/Makefile_MT b/src/Makefile_MT
-index 9e7d1db..9f064cb 100755
+index 5714c8c..843b591 100755
 --- a/src/Makefile_MT
 +++ b/src/Makefile_MT
-@@ -1,10 +1,75 @@
-+# Note that in order to run PARDISO with Multithreading, 
-+# the environment variable OMP_NUM_THREADS needs to be set to
-+# the desired number of cpus, before compiling and before running ccx
-+# e.g. by entering 
-+#	>export OMP_NUM_THREADS=2
-+# in terminal to run PARDISO with 2 cpus
-+# More info in ccx user manual section 2
+@@ -6,7 +6,7 @@
+ # in terminal to run PARDISO with 2 cpus
+ # More info in ccx user manual section 2
  
--CFLAGS = -Wall -O2 -fopenmp -I ../../../SPOOLES.2.2 -DARCH="Linux" -DSPOOLES -DARPACK -DMATRIXSTORAGE -DUSE_MT=1 
--FFLAGS = -Wall -O2 -fopenmp 
+-LIB_PATH=../../..
 +LIB_PATH=../lib
  
--CC=cc
-+WITH_EXODUSII = false
-+WITH_MKL = true
-+WITH_MKL_STATIC = false
-+WITH_AURORA = false
-+
-+OPT = -O2
-+#OPT = -Ofast -march=native
-+CFLAGS = -Wall $(OPT) -fopenmp -DARCH="Linux" -DMATRIXSTORAGE -DUSE_MT=1 -DMKL_LP64 -D_TIMELOG
-+FFLAGS = -Wall $(OPT) $(OPTIONS) -I$(MKL_INCLUDE) -fopenmp
-+
-+#ARPACK
-+#CFLAGS+= -I /home/dalab/CalculixBuild/ARPACK -DARPACK
-+CFLAGS+= -I $(LIB_PATH)/ARPACK -DARPACK
-+
-+#SPOOLES
-+#CFLAGS+= -I /home/dalab/CalculixBuild/SPOOLES.2.2 -DSPOOLES
+ WITH_EXODUSII = false
+ WITH_MKL = true
+@@ -24,7 +24,7 @@ CFLAGS+= -I $(LIB_PATH)/ARPACK -DARPACK
+ 
+ #SPOOLES
+ #CFLAGS+= -I /home/dalab/CalculixBuild/SPOOLES.2.2 -DSPOOLES
+-CFLAGS+= -I $(LIB_PATH)/SPOOLES.2.2 -DSPOOLES
 +CFLAGS+= -I $(LIB_PATH)/SPOOLES -DSPOOLES
-+
-+#BLAS and LAPACK
-+LDFLAGS= -llapack -lblas
-+
-+CC=gcc
- FC=gfortran
  
-+#OPTIONS = -w -fno-second-underscore -fcray-pointer -x f77-cpp-input
-+#FPPSTOP= -x none
-+
-+## EXODUSII
-+ifeq ($(WITH_EXODUSII),true)
-+	CFLAGS  += -DEXODUSII
-+	lib_exists = $(shell ls ../lib/libexodus.so)
-+	ifeq ($(lib_exists), ../lib/libexodus.so)
-+		LDFLAGS += -L../lib -lexodus -lnetcdf
-+	else
-+		LDFLAGS += -lexoIIv2c -lnetcdf
-+	endif
-+	## CFLAGS  += `pkg-config --cflags exodusii` -DEXODUSII
-+	## LDFLAGS += `pkg-config --libs exodusii`
-+endif
-+
-+#INTEL MKL
-+ifeq ($(WITH_MKL),true)
-+	CFLAGS += -DPARDISO
-+ifeq ($(WITH_MKL_STATIC),true)
-+	# For static link version
-+	INTEL_LIB = /opt/intel/lib/intel64_lin
-+	MKL_LIB = /opt/intel/mkl/lib/intel64
-+	MKL_INCLUDE = /opt/intel/mkl/include
-+	CMPLR_PATH = /opt/intel/compilers_and_libraries/linux/lib/intel64
-+else
-+	# For dynamic link version
-+	LDFLAGS += -L/opt/intel/lib/intel64 -L/opt/intel/mkl/lib/intel64
-+	LDFLAGS += -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -liomp5
-+endif
-+endif
-+
-+# SX-AURORA HeteroSolver
-+ifeq ($(WITH_AURORA),true)
-+	CFLAGS += -DAURORA -I/opt/nec/ve/veos/include
-+	LDFLAGS += -L/opt/nec/ve/veos/lib64 -Wl,-rpath=/opt/nec/ve/veos/lib64 -lveo
-+endif
-+
- .c.o :
- 	$(CC) $(CFLAGS) -c $<
- .f.o :
-@@ -18,17 +83,34 @@ OCCXF = $(SCCXF:.f=.o)
- OCCXC = $(SCCXC:.c=.o)
- OCCXMAIN = $(SCCXMAIN:.c=.o)
+ #BLAS and LAPACK
+ LDFLAGS= -llapack -lblas
+@@ -85,8 +85,8 @@ OCCXMAIN = $(SCCXMAIN:.c=.o)
  
--DIR=../../../SPOOLES.2.2
--
  LIBS = \
--       $(DIR)/MT/src/spoolesMT.a \
--       $(DIR)/spooles.a \
--       ../../../ARPACK/libarpack_INTEL.a \
--       -lpthread -lm
-+       $(LIB_PATH)/ARPACK/libarpack_INTEL.a \
+        $(LIB_PATH)/ARPACK/libarpack_INTEL.a \
+-       $(LIB_PATH)/SPOOLES.2.2/MT/src/spoolesMT.a \
+-       $(LIB_PATH)/SPOOLES.2.2/spooles.a
 +       $(LIB_PATH)/SPOOLES/MT/src/spoolesMT.a \
 +       $(LIB_PATH)/SPOOLES/spooles.a
  
--ccx_2.16_MT: $(OCCXMAIN) ccx_2.16_MT.a  $(LIBS)
--	./date.pl; $(CC) $(CFLAGS) -c ccx_2.16.c; $(FC) -fopenmp -Wall -O2 -o $@ $(OCCXMAIN) ccx_2.16_MT.a $(LIBS)
-+all: ccx_2.16_MT
+ all: ccx_2.16_MT
  
--ccx_2.16_MT.a: $(OCCXF) $(OCCXC)
-+$(OCCXMAIN): $(SCCXMAIN) frd.c
-+	./date.pl; $(CC) $(CFLAGS) -c $(SCCXMAIN)
-+	
-+ccx_2.16_MT: $(OCCXMAIN) ccx_2.16.a $(LIBS)
-+ifeq ($(WITH_MKL_STATIC),true)
-+	$(FC) $(FFLAGS) -o $@ $(FPPSTOP) $(OCCXMAIN) ccx_2.16.a $(LDFLAGS) $(LIBS) \
-+	-Wl,--start-group \
-+	$(INTEL_LIB)/libiomp5.a \
-+	$(MKL_LIB)/libmkl_gf_lp64.a \
-+	$(MKL_LIB)/libmkl_gnu_thread.a \
-+	$(MKL_LIB)/libmkl_core.a \
-+	-Wl,--end-group \
-+	-L$(CMPLR_PATH) -lpthread -lm -ldl -lc
-+else
-+	$(FC) $(FFLAGS) -o $@ $(FPPSTOP) $(OCCXMAIN) ccx_2.16.a $(LDFLAGS) $(LIBS) \
-+	-lpthread -lm -ldl -lc
-+endif
-+
-+ccx_2.16.a: $(OCCXF) $(OCCXC)
- 	ar vr $@ $?
--                                                                               
-+
-+clean:
-+	rm *.a *.o ccx_2.16_MT
-+
