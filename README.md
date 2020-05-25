@@ -24,7 +24,7 @@ Intelの公式サイトの手順にてインストールする。
 - apt(Debian系:Debian, Ubuntu,Linux Mint等): [インストール手順(英文)](https://software.intel.com/content/www/us/en/develop/articles/installing-intel-free-libs-and-python-apt-repo.html)
 - rpm(RedHat系:RedHat, CentOS等): [インストール手順(英文)](https://software.intel.com/content/www/us/en/develop/articles/installing-intel-free-libs-and-python-yum-repo.html)
 
-#### 1.3 exodusのインストー(Optional)
+#### 1.3 ExodusIIのインストール(Optional)
 - Ubuntu: 以下のパッケージをインストール
 ```
 % sudo apt install libblas-dev liblapack-dev
