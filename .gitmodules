@@ -9,6 +9,3 @@
 	path = lib/SPOOLES
 	url = https://github.com/ISCPC/SPOOLES.git
 	branch = gcc
-[submodule "lib/exodus"]
-	path = lib/exodus
-	url = https://github.com/certik/exodus.git

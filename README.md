@@ -27,12 +27,10 @@ Intelの公式サイトの手順にてインストールする。
 #### 1.3 ExodusIIのインストール(Optional)
 - Ubuntu: 以下のパッケージをインストール
 ```
-% sudo apt install libblas-dev liblapack-dev
 % sudo apt install libexodusii5 bexodusii-dev
 ```
 - CentOS: 以下のパッケージをインストール
 ```
-% sudo yum install epel-release atlas-devel lapack-devel blas-devel
 % sudo yum install exodusii exodusii-devel
 ```
 
