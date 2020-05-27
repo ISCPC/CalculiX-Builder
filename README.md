@@ -48,8 +48,6 @@ Intelの公式サイトの手順にてインストールする。
 - `WITH_MKL_STATIC={true|false}`: IntelMKLをstatic linkしたモジュールを作成
 - `WITH_AURORA={ture|false}`    : SX-AuroraのVEを用いたソルバ(SOLVER=HETEROSOLVER,CGONVE)をサポート
 
-CentOS
-
 ### 4. ビルド
 ```
 % make
