@@ -5,7 +5,9 @@ CCX_CMD = src/ccx_2.16_MT
 ARPACKLIB = lib/ARPACK/libarpack_INTEL.a
 SPOOLESLIB = lib/SPOOLES/spooles.a lib/SPOOLES/MT/src/spoolesMT.a
 
-OPTS = WITH_EXODUSII=true WITH_MKL=true WITH_MKL_STATIC=false WITH_AURORA=false
+OPTS = WITH_EXODUSII=true
+OPTS += WITH_MKL=true WITH_MKL_STATIC=false
+OPTS += WITH_AURORA=false WITH_AURORA_AVEO=false AVEOPATH=/usr/local
 
 #CC=gcc-4.8
 #FC=gfortran-4.8
