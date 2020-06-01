@@ -46,7 +46,11 @@ Intelの公式サイトの手順にてインストールする。
 - `WITH_EXODUSII={true|false}`  : ExodusII出力(-o exo)をサポート(libexodus.so が必要)
 - `WITH_MKL={true|false}`       : IntelMKL(SOLVER=PARDISO)をサポート(Intel-MKL library が必要)
 - `WITH_MKL_STATIC={true|false}`: IntelMKLをstatic linkしたモジュールを作成
-- `WITH_AURORA={ture|false}`    : SX-AuroraのVEを用いたソルバ(SOLVER=HETEROSOLVER,CGONVE)をサポート
+
+SX-Aurora固有のオプション
+- `WITH_AURORA={ture|false}`     : SX-AuroraのVEを用いたソルバ(SOLVER=HETEROSOLVER,CGONVE)をサポート
+- `WITH_AURORA_AVEO={ture|false}`: 標準のVEOの代わりに[AVEO](https://github.com/SX-Aurora/aveo)を使用
+- `AVEOPATH=[AVEO install path]` : AVEOのライブラリがインストールされているパスを指定
 
 ### 4. ビルド
 ```

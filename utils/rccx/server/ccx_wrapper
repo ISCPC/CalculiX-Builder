@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# This is a sample wrapper sciript.
+# You need to fix the following variable depending on your environment.
+export CCX_VEO_LIBRARY_PATH=/home/iscpc/lib/libccx.so
+CCX_CMD=/home/iscpc/CalculiX/bin/ccx_2.16_MT
+CCX_WORK_DIR=/shared_directory/CalculiX/tmp
+
+export LD_LIBRARY_PATH=/opt/intel/lib/intel64:/opt/intel/mkl/lib/intel64:${LD_LIBRARY_PATH}
+export OMP_NUM_THREADS=$2
+export CCX_DEFAULT_SOLVER=$1
+
+${CCX_CMD} ${CCX_WORK_DIR}/$3
