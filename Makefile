@@ -8,6 +8,7 @@ SPOOLESLIB = lib/SPOOLES/spooles.a lib/SPOOLES/MT/src/spoolesMT.a
 OPTS = WITH_EXODUSII=true
 OPTS += WITH_MKL=true WITH_MKL_STATIC=false
 OPTS += WITH_AURORA=false WITH_AURORA_AVEO=false AVEOPATH=$(HOME)/local
+OPTS += WITH_PRECICE=false
 
 #CC=gcc-4.8
 #FC=gfortran-4.8

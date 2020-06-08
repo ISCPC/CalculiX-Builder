@@ -9,3 +9,6 @@
 	path = lib/SPOOLES
 	url = https://github.com/ISCPC/SPOOLES.git
 	branch = gcc
+[submodule "lib/calculix-adapter"]
+	path = lib/calculix-adapter
+	url = https://github.com/precice/calculix-adapter.git
