@@ -42,7 +42,8 @@ WITH_PRECICE=false
 #####################################################
 OPTS = WITH_EXODUSII=$(WITH_EXODUSII)
 OPTS += WITH_MKL=$(WITH_MKL) WITH_MKL_STATIC=$(WITH_MKL_STATIC)
-OPTS += WITH_AURORA=$(WITH_AURORA) WITH_AURORA_AVEO=$(WITH_AURORA_AVEO) AVEOPATH=$(AVEOPATH)
+OPTS += WITH_AURORA=$(WITH_AURORA) LIBCCXPATH=$(PREFIX)/ve/lib/libccx.so
+OPTS += WITH_AURORA_AVEO=$(WITH_AURORA_AVEO) AVEOPATH=$(AVEOPATH)
 OPTS += WITH_PRECICE=$(WITH_PRECICE)
 
 #CC=gcc-4.8
@@ -101,7 +102,7 @@ ifeq ($(WITH_AURORA),true)
 endif
 
 clean: clean-veolib
-	rm -rf src
+	-rm -rf src
 
 clean-all: clean
 	rm $(ARPACKLIB); \
