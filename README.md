@@ -34,6 +34,10 @@ Intelの公式サイトの手順にてインストールする。
 % sudo yum install exodusii exodusii-devel
 ```
 
+#### 1.4 preCICEインストール(Optional)
+[preCICE公式の手順](https://github.com/precice/precice/wiki/Building:-Using-CMake)にてインストールする。
+現状本ビルダーで対応しているバージョンはpreCICE v2.xです。
+
 ### 2. submoduleソースの取得
 パッチのベースとなるccx 及び前提ライブラリ(ARPACK, SPOOLES)のソースを取得します。
 ```
@@ -46,6 +50,7 @@ Intelの公式サイトの手順にてインストールする。
 - `WITH_EXODUSII={true|false}`  : ExodusII出力(-o exo)をサポート(libexodus.so が必要)
 - `WITH_MKL={true|false}`       : IntelMKL(SOLVER=PARDISO)をサポート(Intel-MKL library が必要)
 - `WITH_MKL_STATIC={true|false}`: IntelMKLをstatic linkしたモジュールを作成
+- `WITH_PRECICE={true|false}`   : preCICE-adapterを有効にします。
 
 SX-Aurora固有のオプション
 - `WITH_AURORA={ture|false}`     : SX-AuroraのVEを用いたソルバ(SOLVER=HETEROSOLVER,CGONVE)をサポート
