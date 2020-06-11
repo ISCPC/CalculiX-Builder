@@ -46,7 +46,7 @@ Intelの公式サイトの手順にてインストールする。
 ```
 
 ### 3. Makefileの設定
-使用したい機能に合わせてOPTSを修正します。
+使用したい機能に合わせてMakefileを修正します。
 - `WITH_EXODUSII={true|false}`  : ExodusII出力(-o exo)をサポート(libexodus.so が必要)
 - `WITH_MKL={true|false}`       : IntelMKL(SOLVER=PARDISO)をサポート(Intel-MKL library が必要)
 - `WITH_MKL_STATIC={true|false}`: IntelMKLをstatic linkしたモジュールを作成
@@ -56,6 +56,9 @@ SX-Aurora固有のオプション
 - `WITH_AURORA={ture|false}`     : SX-AuroraのVEを用いたソルバ(SOLVER=HETEROSOLVER,CGONVE)をサポート
 - `WITH_AURORA_AVEO={ture|false}`: 標準のVEOの代わりに[AVEO](https://github.com/SX-Aurora/aveo)を使用
 - `AVEOPATH=[AVEO install path]` : AVEOのライブラリがインストールされているパスを指定
+
+また、PREFIXにより作成した実行モジュール・ライブラリのインストール先を指定可能です。
+(defaultは/opt/local配下)
 
 ### 4. ビルド
 ```
@@ -68,5 +71,6 @@ SX-Aurora固有のオプション
 ```
 
 ## Install
-任意の場所に以下のファイルをコピー
-- `src/ccx_{version}_MT` : ccx実行モジュール
+```
+% make install
+```
