@@ -3,22 +3,30 @@
 本ドキュメントは、CalculiXをSX-Aurora TSUBASA上で動作させる方法を説明します。
 
 ## 2. Build & Install
-### 2.1 ccxのインストール
-[README.md](https://github.com/ISCPC/CalculiX-Builder/blob/develop/README.md)参照。
-
-### 2.2 libccx.soのインストール
+### 2.1 ccx及びlibccx.soのインストール
+VE上で実行するライブラリ(libccx.so)をビルドするための環境設定を行います。
 ```
 % export PATH=/opt/nec/ve/bin:${PATH}
 % source /opt/nec/ve/nlc/2.0.0/bin/nlcvars.sh
-% cd ccx/velib/libccx
-% make
 ```
-任意の場所に以下のファイルをコピーし、CCX_VEO_LIBRARY_PATHで置き場所を指定する。
+
+[README.md](https://github.com/ISCPC/CalculiX-Builder/blob/develop/README.md)参照。
+SX-Aurora固有のオプションは以下になります。
+- `WITH_AURORA={ture|false}`     : SX-AuroraのVEを用いたソルバ(SOLVER=SX-AUR_*)をサポート
+- `WITH_AURORA_AVEO={ture|false}`: 標準のVEOの代わりに[AVEO](https://github.com/SX-Aurora/aveo)を使用
+- `AVEOPATH=[AVEO install path]` : AVEOのライブラリがインストールされているパスを指定
+
+作成されたモジュールは以下にインストールされます。
+- ccx_2.16_MT: $(PREFIX)/bin/ccx_2.16_MT
+- libccx.so: $(PREFIX)/ve/lib/libccx.so
+
+上記以外の場所のlibccx.soを使用したい場合は、CCX_VEO_LIBRARY_PATHで指定可能です。
+
 ```
 % export CCX_VEO_LIBRARY_PATH=<Path to libccx.so>/libccx.so
 ```
 
-### 2.3 rccxのインストール(Optional)
+### 2.2 rccxのインストール(Optional)
 rccxを使用することで、PrePoMax等Windows上のアプリケーションからネットワーク経由で
 SX-Aurora TSUBASA上のccxを呼び出すことができます。詳細はutils/rccx/READMEを参照。
 
