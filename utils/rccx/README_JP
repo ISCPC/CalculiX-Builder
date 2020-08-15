@@ -1,0 +1,32 @@
+リモートccx(rccx)は、PrePoMax等Windows上のプリポストアプリケーションから、ネットワーク経由で
+Linux上のccxコマンドを呼び出す機能です。rccxは以下の２つのコンポーネントからなります。
+
+1) rccx.exe
+   Windows上で動作するrccxクライアント。現実装では以下の２つを前提としている。
+   - ccxソルバを実行するサーバへのパスワード無しでのSSHアクセス設定(後述)。
+   - ワークディレクトリは、クライアントとサーバで共有ファイルシステム上に配置。
+
+   [ビルド方法]
+   MSYS2(www.msys2.org)上のMinGWを使用してビルド。build.shを参照。
+
+2) ccx_wrapper
+   Linuxサーバ上で動作するccx実行用スクリプト。環境に合わせて設定が必要。
+
+    CCX_CMD: 使用するccxコマンドをフルパスで指定
+    CCX_WORK_DIR: クライアントと共有しているワークディレクトリをフルパスで指定
+
+【使用方法】
+PrePoMaxの"Tools"-"Setting"-"CalculiX"で以下を指定。
+    Work directory: サーバと共有しているワークディレクトリをフルパスで指定
+    Executable: rccx.exe の場所をフルパスで指定
+    Number of processors: サーバで実行する際の並列度を指定
+    Environment variables: 以下の環境変数を設定(必須)
+        CCX_SERVER: LinuxサーバのIPアドレスもしくはホスト名（名前解決できる場合）を指定
+        CCX_USER: Linuxサーバ側のユーザ名を指定(パスワード無しでSSHアクセスできる必要あり)
+        CCX_CMD: Linuxサーバ上に配置したccx_wrapperの場所をフルパスで指定
+        CCX_DEFAULT_SOLVER: ccxでデフォルトで使用するソルバを指定(SPOOLES,PARDISO,HETEROSOLVER,CGONVE等)
+
+【パスワード無しでSSHアクセスを可能にする方法】
+1. コマンドプロンプトからssh-keygen.exeを実行して鍵を作成(passphraseは設定しない)
+2. ${HOME}/.ssh配下に作成されたid_rsa.pubの内容を、Linuxサーバの ~/.ssh/authorized_keysに追加
+3. パスワード無しでssh接続できることを確認

@@ -1,47 +1,47 @@
 # CalculiX for SX-Aurora TSUBASA
 ## 1. About
-本ドキュメントは、CalculiXをSX-Aurora TSUBASA上で動作させる方法を説明します。
+This document describes how to use CalculiX on SX-Aurora TSUBASA.
 
 ## 2. Build & Install
-### 2.1 ccx及びlibccx.soのインストール
-VE上で実行するライブラリ(libccx.so)をビルドするための環境設定を行います。
+### 2.1 Install ccx and libccx.so
+Set environment to build a library running on VE(libccx.so).
 ```
 % export PATH=/opt/nec/ve/bin:${PATH}
 % source /opt/nec/ve/nlc/2.0.0/bin/nlcvars.sh
 ```
 
-[README.md](https://github.com/ISCPC/CalculiX-Builder/blob/develop/README.md)参照。
-SX-Aurora固有のオプションは以下になります。
-- `WITH_AURORA={ture|false}`     : SX-AuroraのVEを用いたソルバ(SOLVER=SX-AUR_*)をサポート
-- `WITH_AURORA_AVEO={ture|false}`: 標準のVEOの代わりに[AVEO](https://github.com/SX-Aurora/aveo)を使用
-- `AVEOPATH=[AVEO install path]` : AVEOのライブラリがインストールされているパスを指定
+Refer [README.md](https://github.com/ISCPC/CalculiX-Builder/blob/develop/README.md).
+SX-Aurora specific options:
+- `WITH_AURORA={ture|false}`     : solvers using SX-Aurora VE (SOLVER=HETEROSOLVER,CGONVE)
+- `WITH_AURORA_AVEO={ture|false}`: Use[AVEO](https://github.com/SX-Aurora/aveo) instead of VEO \[Experimental\]
+- `AVEOPATH=[AVEO install path]` : Specify AVEO library path \[Experimental\]
 
-作成されたモジュールは以下にインストールされます。
+By default, CalculiX-Builder install modules into following path.
 - ccx_2.16_MT: $(PREFIX)/bin/ccx_2.16_MT
 - libccx.so: $(PREFIX)/ve/lib/libccx.so
 
-上記以外の場所のlibccx.soを使用したい場合は、CCX_VEO_LIBRARY_PATHで指定可能です。
+If you would like to use libccx.so on different location, use CCX_VEO_LIBRARY_PATH environment variable.
 
 ```
 % export CCX_VEO_LIBRARY_PATH=<Path to libccx.so>/libccx.so
 ```
 
-### 2.2 rccxのインストール(Optional)
-rccxを使用することで、PrePoMax等Windows上のアプリケーションからネットワーク経由で
-SX-Aurora TSUBASA上のccxを呼び出すことができます。詳細はutils/rccx/READMEを参照。
+### 2.2 Install rccx \[Optional\]
+Remote ccx(rccx) enables you to use ccx on SX-Aurora TSUBASA from the applications
+on your Windows PC such as PrePoMax. Please refer utils/rccx/README.
 
 
 ## 3. Additional Solver for SX-Aurora TSUBASA
-SX-Aurora用(WITH_AURORA指定)のccxでは以下の既存のソルバに加え、SX-Aurora TSUBASA
-のVE(Vector Engine)を利用した以下のソルバが追加されます。
+Ccx for SX-Aurora, built with WITH_AURORA=true, supports addtional solvers
+which uses VE(Vector Engine) on SX-Aurora TSUBASA as follows. 
 
-- SX-AUR_HS: SX-Aurora TSUBASA用に実装された直接法による大規模疎行列連立1次方程式ソルバである[HeteroSolver](https://www.hpc.nec/documents/sdk/SDK_NLC/UsersGuide/heterosolver/c/ja/index.html)を使用します。
-- SX-AUR_SCALING: CalculiXに実装されている反復法ソルバITERATIVESCALINGをSX-Aurora TSUBASAのVE(Vector Engine)上で高速に実行します。本ソルバは[SBLAS](https://www.hpc.nec/documents/sdk/SDK_NLC/UsersGuide/sblas/c/ja/index.html)を利用することで、ベクトル化+OpenMPによる高速化が図られています。
+- SX-AUR_HS: Use [HeteroSolver](https://www.hpc.nec/documents/sdk/SDK_NLC/UsersGuide/heterosolver/c/ja/index.html) which is direct methods solver tuned for SX-Aurora TSUBASA.
+- SX-AUR_SCALING: Use iterative solver tuned for SX-Aurora TSUBASA. This solver uses the same algorithm with ITERATIVESCALING solver impletened on the original ccx. But by using [SBLAS](https://www.hpc.nec/documents/sdk/SDK_NLC/UsersGuide/sblas/c/ja/index.html) library on VE, outstanding performance improvement acheived.
 
 
 ## 4. Usage
-### 4.1 環境設定(各種ライブラリのパス設定等)
-指定例)
+### 4.1 Configure Environment variables
+Example)
 ```
 % export PATH=/opt/nec/ve/bin:${PATH}
 % source /opt/nec/ve/nlc/2.0.0/bin/nlcvars.sh
@@ -49,23 +49,24 @@ SX-Aurora用(WITH_AURORA指定)のccxでは以下の既存のソルバに加え�
 % export OMP_NUM_THREADS=8
 ```
 
-### 4.2 ソルバの指定
-使用するソルバの指定は、以下の2つのいずれかの方法で行います。
- 
-【注意】現状、SOLVERで指定可能な解析はSTATICのみ。それ以外の解析で指定した場合の動作は不定です。
+### 4.2 Specify solver
 
-- .inpファイルによる指定方法  
-各解析処理記述子のオプションとして、SOLVER=SX-AUR_HSもしくはSX-AUR_SCALINGを指定します。
-指定例） 
+There are two ways to use solvers for SX-Aurora TSUBASA.
+ 
+NOTICE: SX_AUR options can be used ONLY \*STATIC analysis. If SX_AUR solver is specified for other analysis, the results are unpredictable.
+
+- By editing .inp file
+Add SOLVER=SX-AUR_HS of SX-AUR_SCALING option for \*STATIC description.
+Example） 
 ```
 ** Step-1 ++++++++++++++++++++++++++++++++++++++++++++++++++
 *Step
 *Static, SOLVER=SX-AUR_HS
 ```
 
-- 環境変数による指定方法
-環境変数CCX_DEFAULT_SOLVERにSX-AUR_HSもしくはSX-AUR_SCALINGを指定します。
-指定例） 
+- By using environment variable
+Set SX-AUR_HS or SX-AUR_SCALING to CCX_DEFAULT_SOLVER
+Example） 
 ```
 % export CCX_DEFAULT_SOLVER=SX-AUR_SCALING
 ```

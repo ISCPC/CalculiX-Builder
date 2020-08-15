@@ -1,32 +1,36 @@
-リモートccx(rccx)は、PrePoMax等Windows上のプリポストアプリケーションから、ネットワーク経由で
-Linux上のccxコマンドを呼び出す機能です。rccxは以下の２つのコンポーネントからなります。
+Remote ccx(rccx) enables you to use ccx on Linux server from the applications
+on your Windows PC such as PrePoMax. This function consist of two components,
+client-side command on Windows and server-side script on Linux server.
 
 1) rccx.exe
-   Windows上で動作するrccxクライアント。現実装では以下の２つを前提としている。
-   - ccxソルバを実行するサーバへのパスワード無しでのSSHアクセス設定(後述)。
-   - ワークディレクトリは、クライアントとサーバで共有ファイルシステム上に配置。
+   The client-side command running on Windows. The following configuration required for now.
+   - SSH access without login prompt (see below)
+   - Share working directory between client(Windows) and Server(Linux)
 
-   [ビルド方法]
-   MSYS2(www.msys2.org)上のMinGWを使用してビルド。build.shを参照。
+   [How to build]
+   Build with MinGW on MSYS2(www.msys2.org). See build.sh for detail.
+
+   Pre-built command is included at clinet/rccx.exe.
 
 2) ccx_wrapper
-   Linuxサーバ上で動作するccx実行用スクリプト。環境に合わせて設定が必要。
+   The wrapper script which calls ccx command installed on Linux server.
+   You need to set the following variables in accordance with your environment.
 
-    CCX_CMD: 使用するccxコマンドをフルパスで指定
-    CCX_WORK_DIR: クライアントと共有しているワークディレクトリをフルパスで指定
+    CCX_CMD: set full-path to your ccx command
+    CCX_WORK_DIR: set full-path to work directory which is shared with client Windows PC.
 
-【使用方法】
-PrePoMaxの"Tools"-"Setting"-"CalculiX"で以下を指定。
-    Work directory: サーバと共有しているワークディレクトリをフルパスで指定
-    Executable: rccx.exe の場所をフルパスで指定
-    Number of processors: サーバで実行する際の並列度を指定
-    Environment variables: 以下の環境変数を設定(必須)
-        CCX_SERVER: LinuxサーバのIPアドレスもしくはホスト名（名前解決できる場合）を指定
-        CCX_USER: Linuxサーバ側のユーザ名を指定(パスワード無しでSSHアクセスできる必要あり)
-        CCX_CMD: Linuxサーバ上に配置したccx_wrapperの場所をフルパスで指定
-        CCX_DEFAULT_SOLVER: ccxでデフォルトで使用するソルバを指定(SPOOLES,PARDISO,HETEROSOLVER,CGONVE等)
+[How to Use from PrePoMax]
+Edit configuration in "Tools"-"Setting"-"CalculiX" on PrePoMax
+    Work directory: set full-path to work directory which is shared with client Windows PC.
+    Executable: set full-path to rccx.exe
+    Number of processors: the number of processor on server side
+    Environment variables: set following variables (Required)
+        CCX_SERVER: IP address or Hostname(If the name can be resolved on Windows) to Linux server
+        CCX_USER: username on Linux server (Require ssh access without login prompt)
+        CCX_CMD: full-path to ccx_wrapper on Linux
+        CCX_DEFAULT_SOLVER: set default solver name for ccx(SPOOLES,PARDISO,HETEROSOLVER,CGONVE,...)
 
-【パスワード無しでSSHアクセスを可能にする方法】
-1. コマンドプロンプトからssh-keygen.exeを実行して鍵を作成(passphraseは設定しない)
-2. ${HOME}/.ssh配下に作成されたid_rsa.pubの内容を、Linuxサーバの ~/.ssh/authorized_keysに追加
-3. パスワード無しでssh接続できることを確認
+[How to set ssh accsess without login prompt]
+1. Run ssh-keygen.exe in command prompt. Do not set passphrase.
+2. copy the content in id_rsa.pub created under ${HOME}/.ssh to ~/.ssh/authorized_keys on Linux server.
+3. Check ssh access without login prompt.
