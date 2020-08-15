@@ -20,12 +20,6 @@ SX-Aurora固有のオプションは以下になります。
 - ccx_2.16_MT: $(PREFIX)/bin/ccx_2.16_MT
 - libccx.so: $(PREFIX)/ve/lib/libccx.so
 
-上記以外の場所のlibccx.soを使用したい場合は、CCX_VEO_LIBRARY_PATHで指定可能です。
-
-```
-% export CCX_VEO_LIBRARY_PATH=<Path to libccx.so>/libccx.so
-```
-
 ### 2.2 rccxのインストール(Optional)
 rccxを使用することで、PrePoMax等Windows上のアプリケーションからネットワーク経由で
 SX-Aurora TSUBASA上のccxを呼び出すことができます。詳細はutils/rccx/READMEを参照。
@@ -45,8 +39,13 @@ SX-Aurora用(WITH_AURORA指定)のccxでは以下の既存のソルバに加え�
 ```
 % export PATH=/opt/nec/ve/bin:${PATH}
 % source /opt/nec/ve/nlc/2.0.0/bin/nlcvars.sh
-% export CCX_VEO_LIBRARY_PATH=/home/iscpc/lib/libccx.so
 % export OMP_NUM_THREADS=8
+```
+
+デフォルトの場所のlibccx.soを使用したい場合は、CCX_VEO_LIBRARY_PATHで指定が必要です。
+
+```
+% export CCX_VEO_LIBRARY_PATH=<Path to libccx.so>/libccx.so
 ```
 
 ### 4.2 ソルバの指定
@@ -56,6 +55,7 @@ SX-Aurora用(WITH_AURORA指定)のccxでは以下の既存のソルバに加え�
 
 - .inpファイルによる指定方法  
 各解析処理記述子のオプションとして、SOLVER=SX-AUR_HSもしくはSX-AUR_SCALINGを指定します。
+
 指定例） 
 ```
 ** Step-1 ++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -65,6 +65,7 @@ SX-Aurora用(WITH_AURORA指定)のccxでは以下の既存のソルバに加え�
 
 - 環境変数による指定方法
 環境変数CCX_DEFAULT_SOLVERにSX-AUR_HSもしくはSX-AUR_SCALINGを指定します。
+
 指定例） 
 ```
 % export CCX_DEFAULT_SOLVER=SX-AUR_SCALING

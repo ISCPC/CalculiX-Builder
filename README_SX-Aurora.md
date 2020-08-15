@@ -10,7 +10,8 @@ Set environment to build a library running on VE(libccx.so).
 % source /opt/nec/ve/nlc/2.0.0/bin/nlcvars.sh
 ```
 
-Refer [README.md](https://github.com/ISCPC/CalculiX-Builder/blob/develop/README.md).
+Refer [README.md](https://github.com/ISCPC/CalculiX-Builder/blob/develop/README.md) for build.
+
 SX-Aurora specific options:
 - `WITH_AURORA={ture|false}`     : solvers using SX-Aurora VE (SOLVER=HETEROSOLVER,CGONVE)
 - `WITH_AURORA_AVEO={ture|false}`: Use[AVEO](https://github.com/SX-Aurora/aveo) instead of VEO \[Experimental\]
@@ -19,12 +20,6 @@ SX-Aurora specific options:
 By default, CalculiX-Builder install modules into following path.
 - ccx_2.16_MT: $(PREFIX)/bin/ccx_2.16_MT
 - libccx.so: $(PREFIX)/ve/lib/libccx.so
-
-If you would like to use libccx.so on different location, use CCX_VEO_LIBRARY_PATH environment variable.
-
-```
-% export CCX_VEO_LIBRARY_PATH=<Path to libccx.so>/libccx.so
-```
 
 ### 2.2 Install rccx \[Optional\]
 Remote ccx(rccx) enables you to use ccx on SX-Aurora TSUBASA from the applications
@@ -45,8 +40,13 @@ Example)
 ```
 % export PATH=/opt/nec/ve/bin:${PATH}
 % source /opt/nec/ve/nlc/2.0.0/bin/nlcvars.sh
-% export CCX_VEO_LIBRARY_PATH=/home/iscpc/lib/libccx.so
 % export OMP_NUM_THREADS=8
+```
+
+If you would like to use libccx.so on different location from default path, use CCX_VEO_LIBRARY_PATH environment variable.
+
+```
+% export CCX_VEO_LIBRARY_PATH=<Path to libccx.so>/libccx.so
 ```
 
 ### 4.2 Specify solver
@@ -57,6 +57,7 @@ NOTICE: SX_AUR options can be used ONLY \*STATIC analysis. If SX_AUR solver is s
 
 - By editing .inp file
 Add SOLVER=SX-AUR_HS of SX-AUR_SCALING option for \*STATIC description.
+
 Example） 
 ```
 ** Step-1 ++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -66,6 +67,7 @@ Example）
 
 - By using environment variable
 Set SX-AUR_HS or SX-AUR_SCALING to CCX_DEFAULT_SOLVER
+
 Example） 
 ```
 % export CCX_DEFAULT_SOLVER=SX-AUR_SCALING

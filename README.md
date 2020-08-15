@@ -20,7 +20,7 @@ or SX-Aurora suport by configuration.
 ```
 
 #### 1.2 Install PARDISO(Intel-MKL) \[Optional\]
-Install Intel-MKL packages by following URL.
+Install Intel-MKL packages by following documents.
 - apt(Debian, Ubuntu, Linux Mint, ...): [Installing Intel® Performance Libraries and Intel® Distribution for Python Using APT Repository](https://software.intel.com/content/www/us/en/develop/articles/installing-intel-free-libs-and-python-apt-repo.html)
 - rpm(RedHat, CentOS, ...): [Installing Intel® Performance Libraries and Intel® Distribution for Python Using YUM Repository](https://software.intel.com/content/www/us/en/develop/articles/installing-intel-free-libs-and-python-yum-repo.html)
 
@@ -36,7 +36,7 @@ Install Intel-MKL packages by following URL.
 
 #### 1.4 Install preCICE \[Optional\]
 Install preCICE by [instruction on the preCICE official site](https://github.com/precice/precice/wiki/Building:-Using-CMake).
-Currently, this Builder supports Only preCICE v2.x.
+Currently, CalculiX-Builder supports ONLY preCICE v2.x.
 
 ### 2. get sources for CalculiX-Builder
 Get CalculiX-Builder from this repository and the base ccx sources and required libraries such as ARPACK and SPOOLES as submodules.
@@ -50,13 +50,13 @@ Get CalculiX-Builder from this repository and the base ccx sources and required 
 Edit Makefile to enable/disable optional functions.
 - `WITH_EXODUSII={true|false}`  : ExodusII Output(-o exo) support(require libexodus.so)
 - `WITH_MKL={true|false}`       : IntelMKL(SOLVER=PARDISO) support(require Intel-MKL library)
-- `WITH_MKL_STATIC={true|false}`: Link IntelMKL statically
+- `WITH_MKL_STATIC={true|false}`: Link IntelMKL(PARDISO) statically
 - `WITH_PRECICE={true|false}`   : preCICE-adapter support
 
 SX-Aurora specific options:
 - `WITH_AURORA={ture|false}`     : solvers using SX-Aurora VE (SOLVER=HETEROSOLVER,CGONVE)
-- `WITH_AURORA_AVEO={ture|false}`: Use[AVEO](https://github.com/SX-Aurora/aveo) instead of VEO \[Experimental\]
-- `AVEOPATH=[AVEO install path]` : Specify AVEO library path \[Experimental\]
+- `WITH_AURORA_AVEO={ture|false}`: Use [AVEO](https://github.com/SX-Aurora/aveo) instead of VEO \[Experimental\]
+- `AVEOPATH=[AVEO install path]` : Specify path to AVEO library \[Experimental\]
 
 You can specify install path by editting PREFIX. By default, the modules are installed under /opt/local.
 
