@@ -13,8 +13,6 @@ VE上で実行するライブラリ(libccx.so)をビルドするための環境�
 [README.md](https://github.com/ISCPC/CalculiX-Builder/blob/develop/README.md)参照。
 SX-Aurora固有のオプションは以下になります。
 - `WITH_AURORA={ture|false}`     : SX-AuroraのVEを用いたソルバ(SOLVER=SX-AUR_*)をサポート
-- `WITH_AURORA_AVEO={ture|false}`: 標準のVEOの代わりに[AVEO](https://github.com/SX-Aurora/aveo)を使用
-- `AVEOPATH=[AVEO install path]` : AVEOのライブラリがインストールされているパスを指定
 
 作成されたモジュールは以下にインストールされます。
 - ccx_2.16_MT: $(PREFIX)/bin/ccx_2.16_MT

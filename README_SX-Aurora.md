@@ -14,8 +14,6 @@ Refer [README.md](https://github.com/ISCPC/CalculiX-Builder/blob/develop/README.
 
 SX-Aurora specific options:
 - `WITH_AURORA={ture|false}`     : solvers using SX-Aurora VE (SOLVER=HETEROSOLVER,CGONVE)
-- `WITH_AURORA_AVEO={ture|false}`: Use[AVEO](https://github.com/SX-Aurora/aveo) instead of VEO \[Experimental\]
-- `AVEOPATH=[AVEO install path]` : Specify AVEO library path \[Experimental\]
 
 By default, CalculiX-Builder install modules into following path.
 - ccx_2.16_MT: $(PREFIX)/bin/ccx_2.16_MT
