@@ -55,8 +55,6 @@ CalculiX-Builder及びパッチのベースとなるccx 及び前提ライブラ
 
 SX-Aurora固有のオプション
 - `WITH_AURORA={ture|false}`     : SX-AuroraのVEを用いたソルバ(SOLVER=HETEROSOLVER,CGONVE)をサポート
-- `WITH_AURORA_AVEO={ture|false}`: 標準のVEOの代わりに[AVEO](https://github.com/SX-Aurora/aveo)を使用
-- `AVEOPATH=[AVEO install path]` : AVEOのライブラリがインストールされているパスを指定
 
 また、PREFIXにより作成した実行モジュール・ライブラリのインストール先を指定可能です。
 (defaultは/opt/local配下)

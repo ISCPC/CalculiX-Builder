@@ -28,8 +28,12 @@ WITH_MKL_STATIC=false
 # Enable/Disable SX-Aurora support
 #
 WITH_AURORA=false
-WITH_AURORA_AVEO=false
-AVEOPATH=$(PREFIX)
+#
+# AVEO option is OBSOLETED because AVEO became an official implementation
+# of VEO at the end of Sep. 2020. AVEO is used by default for now.
+#
+#WITH_AURORA_AVEO=false
+#AVEOPATH=$(PREFIX)
 
 #
 # Enable/Disable preCICE support

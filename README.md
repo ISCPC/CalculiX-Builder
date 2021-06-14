@@ -55,8 +55,6 @@ Edit Makefile to enable/disable optional functions.
 
 SX-Aurora specific options:
 - `WITH_AURORA={ture|false}`     : solvers using SX-Aurora VE (SOLVER=HETEROSOLVER,CGONVE)
-- `WITH_AURORA_AVEO={ture|false}`: Use [AVEO](https://github.com/SX-Aurora/aveo) instead of VEO \[Experimental\]
-- `AVEOPATH=[AVEO install path]` : Specify path to AVEO library \[Experimental\]
 
 You can specify install path by editting PREFIX. By default, the modules are installed under /opt/local.
 
