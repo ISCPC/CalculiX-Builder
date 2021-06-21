@@ -24,7 +24,7 @@ PrePoMaxの"Tools"-"Setting"-"CalculiX"で以下を指定。
         CCX_SERVER: LinuxサーバのIPアドレスもしくはホスト名（名前解決できる場合）を指定
         CCX_USER: Linuxサーバ側のユーザ名を指定(パスワード無しでSSHアクセスできる必要あり)
         CCX_CMD: Linuxサーバ上に配置したccx_wrapperの場所をフルパスで指定
-        CCX_DEFAULT_SOLVER: ccxでデフォルトで使用するソルバを指定(SPOOLES,PARDISO,HETEROSOLVER,CGONVE等)
+        CCX_DEFAULT_SOLVER: ccxでデフォルトで使用するソルバを指定(SPOOLES,PARDISO,SX-AUR_HS,SX-AUR_SCALING等)
 
 【パスワード無しでSSHアクセスを可能にする方法】
 1. コマンドプロンプトからssh-keygen.exeを実行して鍵を作成(passphraseは設定しない)

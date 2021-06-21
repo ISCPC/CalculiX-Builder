@@ -28,7 +28,7 @@ Edit configuration in "Tools"-"Setting"-"CalculiX" on PrePoMax
         CCX_SERVER: IP address or Hostname(If the name can be resolved on Windows) to Linux server
         CCX_USER: username on Linux server (Require ssh access without login prompt)
         CCX_CMD: full-path to ccx_wrapper on Linux
-        CCX_DEFAULT_SOLVER: set default solver name for ccx(SPOOLES,PARDISO,HETEROSOLVER,CGONVE,...)
+        CCX_DEFAULT_SOLVER: set default solver name for ccx(SPOOLES,PARDISO,SX-AUR_HS,SX-AUR_SCALING,...)
 
 [How to set ssh accsess without login prompt]
 1. Run ssh-keygen.exe in command prompt. Do not set passphrase.
