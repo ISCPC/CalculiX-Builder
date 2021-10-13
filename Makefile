@@ -10,8 +10,8 @@
 #
 # Set install path
 #
-PREFIX = /opt/local
-#PREFIX = $(HOME)/local
+#PREFIX = /opt/local
+PREFIX = $(HOME)/local
 
 #
 # Enable/Disable ExodusII support
@@ -27,13 +27,8 @@ WITH_MKL_STATIC=false
 #
 # Enable/Disable SX-Aurora support
 #
-WITH_AURORA=false
-#
-# AVEO option is OBSOLETED because AVEO became an official implementation
-# of VEO at the end of Sep. 2020. AVEO is used by default for now.
-#
-#WITH_AURORA_AVEO=false
-#AVEOPATH=$(PREFIX)
+WITH_AURORA=true
+VESOLVERPATH=$(PREFIX)
 
 #
 # Enable/Disable preCICE support
@@ -47,7 +42,7 @@ WITH_PRECICE=false
 OPTS = WITH_EXODUSII=$(WITH_EXODUSII)
 OPTS += WITH_MKL=$(WITH_MKL) WITH_MKL_STATIC=$(WITH_MKL_STATIC)
 OPTS += WITH_AURORA=$(WITH_AURORA) LIBCCXPATH=$(PREFIX)/ve/lib/libccx.so
-OPTS += WITH_AURORA_AVEO=$(WITH_AURORA_AVEO) AVEOPATH=$(AVEOPATH)
+OPTS += VESOLVERPATH=$(VESOLVERPATH)
 OPTS += WITH_PRECICE=$(WITH_PRECICE)
 
 #CC=gcc-4.8
@@ -60,9 +55,6 @@ INSTALL = /usr/bin/install
 
 ARPACKLIB = lib/ARPACK/libarpack_INTEL.a
 SPOOLESLIB = lib/SPOOLES/spooles.a lib/SPOOLES/MT/src/spoolesMT.a
-ifeq ($(WITH_AURORA),true)
-VEOLIBCCX = ccx/velib/libccx/libccx.so
-endif
 
 all: $(CCX_CMD) $(VEOLIBCCX)
 
@@ -88,24 +80,10 @@ $(SPOOLESLIB):
 	cd MT; \
 	$(MAKE) lib
 
-$(VEOLIBCCX):
-	cd ccx/velib/libccx; \
-	$(MAKE)
-
-install-veolib:
-ifeq ($(WITH_AURORA),true)
-	$(INSTALL) -D -t $(PREFIX)/ve/lib $(VEOLIBCCX)
-endif
-
-install: install-veolib
+install:
 	$(INSTALL) -D -t $(PREFIX)/bin $(CCX_CMD)
 
-clean-veolib:
-ifeq ($(WITH_AURORA),true)
-	cd $(PWD)/ccx/velib/libccx; $(MAKE) clean
-endif
-
-clean: clean-veolib
+clean:
 	-rm -rf src
 
 clean-all: clean
