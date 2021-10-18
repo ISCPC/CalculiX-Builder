@@ -3,8 +3,17 @@
 本ドキュメントは、CalculiXをSX-Aurora TSUBASA上で動作させる方法を説明します。
 
 ## 2. Build & Install
-### 2.1 ccx及びlibccx.soのインストール
-VE上で実行するライブラリ(libccx.so)をビルドするための環境設定を行います。
+### 2.1 vesolverのインストール
+vesolverを以下からダウンロードして、任意のディレクトリに展開します。
+(以下の例では、~/local配下に展開)
+```
+% wget https://github.com/ISCPC/vesolver/releases/download/Release_20211018_beta/vesolver_20211018_beta.tar.gz
+% cd ~/local
+% tar xf <Path to vesolver>/vesolver_20211018_beta.tar.gz
+```
+
+### 2.2 VEsolver対応版ccxのインストール
+VEsolver対応版ccxをビルドするための環境設定を行います。
 ```
 % export PATH=/opt/nec/ve/bin:${PATH}
 % source /opt/nec/ve/nlc/2.0.0/bin/nlcvars.sh
@@ -13,12 +22,13 @@ VE上で実行するライブラリ(libccx.so)をビルドするための環境�
 [README.md](https://github.com/ISCPC/CalculiX-Builder/blob/develop/README.md)参照。
 SX-Aurora固有のオプションは以下になります。
 - `WITH_AURORA={ture|false}`     : SX-AuroraのVEを用いたソルバ(SOLVER=SX-AUR_*)をサポート
+- `VESOLVER_PATH=<Path to vesolver>` : 2.1でvesolverを展開したPATH(デフォルト:~/local)
 
 作成されたモジュールは以下にインストールされます。
 - ccx_2.16_MT: $(PREFIX)/bin/ccx_2.16_MT
-- libccx.so: $(PREFIX)/ve/lib/libccx.so
 
-### 2.2 rccxのインストール(Optional)
+
+### 2.3 rccxのインストール(Optional)
 rccxを使用することで、PrePoMax等Windows上のアプリケーションからネットワーク経由で
 SX-Aurora TSUBASA上のccxを呼び出すことができます。詳細はutils/rccx/READMEを参照。
 
@@ -38,13 +48,13 @@ SX-Aurora用(WITH_AURORA指定)のccxでは以下の既存のソルバに加え�
 % export PATH=/opt/nec/ve/bin:${PATH}
 % source /opt/nec/ve/nlc/2.0.0/bin/nlcvars.sh
 % export OMP_NUM_THREADS=8
+% export DISTROOT=${HOME}/local   <== vesolverを展開したPATHを指定
+% export VESOLVER_PATH=${DISTROOT}/libvesolver.so
+% export VE_LD_LIBRARY_PATH=${DISTROOT}/ve/lib:${VE_LD_LIBRARY_PATH}
 ```
 
-デフォルトの場所のlibccx.soを使用したい場合は、CCX_VEO_LIBRARY_PATHで指定が必要です。
+VESOLVER_PATHには、libvesolver.soへのPATHを指定してください。
 
-```
-% export CCX_VEO_LIBRARY_PATH=<Path to libccx.so>/libccx.so
-```
 
 ### 4.2 ソルバの指定
 使用するソルバの指定は、以下の2つのいずれかの方法で行います。

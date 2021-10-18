@@ -27,7 +27,7 @@ WITH_MKL_STATIC=false
 #
 # Enable/Disable SX-Aurora support
 #
-WITH_AURORA=true
+WITH_AURORA=false
 VESOLVERPATH=$(PREFIX)
 
 #
