@@ -49,7 +49,7 @@ OPTS += WITH_PRECICE=$(WITH_PRECICE)
 #FC=gfortran-4.8
 #OPTS += CC=$(CC) FC=$(FC)
 
-CCX_BIN = ccx_2.16_MT
+CCX_BIN = ccx_2.18_MT
 CCX_CMD = src/$(CCX_BIN)
 INSTALL = /usr/bin/install
 
