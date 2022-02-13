@@ -3,23 +3,25 @@
 This document describes how to use CalculiX on SX-Aurora TSUBASA.
 
 ## 2. Build & Install
-### 2.1 Install ccx and libccx.so
-Set environment to build a library running on VE(libccx.so).
+### 2.1 Install vesolver
+Download vesolver library fron following URL and extract it on ~/local.
 ```
-% export PATH=/opt/nec/ve/bin:${PATH}
-% source /opt/nec/ve/nlc/2.0.0/bin/nlcvars.sh
+% wget https://github.com/ISCPC/vesolver/releases/download/Release_20220212_beta/vesolver_20220212_beta.tar.gz
+% cd ~/local
+% tar xf <Path to vesolver>/vesolver_20220212_beta.tar.gz
 ```
 
+### 2.2 Build and install ccx with SX-Aurora VE support
 Refer [README.md](https://github.com/ISCPC/CalculiX-Builder/blob/develop/README.md) for build.
 
 SX-Aurora specific options:
-- `WITH_AURORA={ture|false}`     : solvers using SX-Aurora VE (SOLVER=HETEROSOLVER,CGONVE)
+- `WITH_AURORA={ture|false}`     : solvers using SX-Aurora VE (SOLVER=SX-AUR_*)
+- `VESOLVER_PATH=<Path to vesolver>` : path to vesolver installed at 2.1. (default: ~/local)
 
 By default, CalculiX-Builder install modules into following path.
-- ccx_2.16_MT: $(PREFIX)/bin/ccx_2.16_MT
-- libccx.so: $(PREFIX)/ve/lib/libccx.so
+- ccx_2.18_MT: $(PREFIX)/bin/ccx_2.18_MT
 
-### 2.2 Install rccx \[Optional\]
+### 2.3 Install rccx \[Optional\]
 Remote ccx(rccx) enables you to use ccx on SX-Aurora TSUBASA from the applications
 on your Windows PC such as PrePoMax. Please refer utils/rccx/README.
 
@@ -37,24 +39,19 @@ which uses VE(Vector Engine) on SX-Aurora TSUBASA as follows.
 Example)
 ```
 % export PATH=/opt/nec/ve/bin:${PATH}
-% source /opt/nec/ve/nlc/2.0.0/bin/nlcvars.sh
+% source /opt/nec/ve/nlc/2.2.0/bin/nlcvars.sh
 % export OMP_NUM_THREADS=8
-```
-
-If you would like to use libccx.so on different location from default path, use CCX_VEO_LIBRARY_PATH environment variable.
-
-```
-% export CCX_VEO_LIBRARY_PATH=<Path to libccx.so>/libccx.so
+% export DISTROOT=${HOME}/local   <== path to directory where you extracted vesolver
+% export VESOLVER_PATH=${DISTROOT}/libvesolver.so
+% export VE_LD_LIBRARY_PATH=${DISTROOT}/ve/lib:${VE_LD_LIBRARY_PATH}
 ```
 
 ### 4.2 Specify solver
 
 There are two ways to use solvers for SX-Aurora TSUBASA.
  
-NOTICE: SX_AUR options can be used ONLY \*STATIC analysis. If SX_AUR solver is specified for other analysis, the results are unpredictable.
-
 - By editing .inp file
-Add SOLVER=SX-AUR_HS of SX-AUR_SCALING option for \*STATIC description.
+Add SOLVER=SX-AUR_HS of SX-AUR_SCALING option to procedure description.
 
 Example） 
 ```

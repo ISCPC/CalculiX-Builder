@@ -7,25 +7,20 @@
 vesolverを以下からダウンロードして、任意のディレクトリに展開します。
 (以下の例では、~/local配下に展開)
 ```
-% wget https://github.com/ISCPC/vesolver/releases/download/Release_20211018_beta/vesolver_20211018_beta.tar.gz
+% wget https://github.com/ISCPC/vesolver/releases/download/Release_20220212_beta/vesolver_20220212_beta.tar.gz
 % cd ~/local
-% tar xf <Path to vesolver>/vesolver_20211018_beta.tar.gz
+% tar xf <Path to vesolver>/vesolver_20220212_beta.tar.gz
 ```
 
 ### 2.2 VEsolver対応版ccxのインストール
-VEsolver対応版ccxをビルドするための環境設定を行います。
-```
-% export PATH=/opt/nec/ve/bin:${PATH}
-% source /opt/nec/ve/nlc/2.0.0/bin/nlcvars.sh
-```
-
 [README.md](https://github.com/ISCPC/CalculiX-Builder/blob/develop/README.md)参照。
+
 SX-Aurora固有のオプションは以下になります。
 - `WITH_AURORA={ture|false}`     : SX-AuroraのVEを用いたソルバ(SOLVER=SX-AUR_*)をサポート
 - `VESOLVER_PATH=<Path to vesolver>` : 2.1でvesolverを展開したPATH(デフォルト:~/local)
 
 作成されたモジュールは以下にインストールされます。
-- ccx_2.16_MT: $(PREFIX)/bin/ccx_2.16_MT
+- ccx_2.18_MT: $(PREFIX)/bin/ccx_2.18_MT
 
 
 ### 2.3 rccxのインストール(Optional)
@@ -46,21 +41,17 @@ SX-Aurora用(WITH_AURORA指定)のccxでは以下の既存のソルバに加え�
 指定例)
 ```
 % export PATH=/opt/nec/ve/bin:${PATH}
-% source /opt/nec/ve/nlc/2.0.0/bin/nlcvars.sh
+% source /opt/nec/ve/nlc/2.2.0/bin/nlcvars.sh
 % export OMP_NUM_THREADS=8
 % export DISTROOT=${HOME}/local   <== vesolverを展開したPATHを指定
 % export VESOLVER_PATH=${DISTROOT}/libvesolver.so
 % export VE_LD_LIBRARY_PATH=${DISTROOT}/ve/lib:${VE_LD_LIBRARY_PATH}
 ```
 
-VESOLVER_PATHには、libvesolver.soへのPATHを指定してください。
-
 
 ### 4.2 ソルバの指定
 使用するソルバの指定は、以下の2つのいずれかの方法で行います。
  
-【注意】現状、SOLVERで指定可能な解析はSTATICのみ。それ以外の解析で指定した場合の動作は不定です。
-
 - .inpファイルによる指定方法  
 各解析処理記述子のオプションとして、SOLVER=SX-AUR_HSもしくはSX-AUR_SCALINGを指定します。
 
