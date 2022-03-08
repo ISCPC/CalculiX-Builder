@@ -42,7 +42,7 @@ Example)
 % source /opt/nec/ve/nlc/2.2.0/bin/nlcvars.sh
 % export OMP_NUM_THREADS=8
 % export DISTROOT=${HOME}/local   <== path to directory where you extracted vesolver
-% export VESOLVER_PATH=${DISTROOT}/libvesolver.so
+% export VESOLVER_PATH=${DISTROOT}/ve/lib/libvesolver.so
 % export VE_LD_LIBRARY_PATH=${DISTROOT}/ve/lib:${VE_LD_LIBRARY_PATH}
 ```
 
