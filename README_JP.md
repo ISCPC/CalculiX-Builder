@@ -9,14 +9,19 @@
 
 ## Build
 ### 1. 依存パッケージのインストール
-#### 1.1 BLAS/LAPACKのインストール(必須)
+#### 1.1 ビルドツールおよびBLAS/LAPACKのインストール(必須)
 - Ubuntu: 以下のパッケージをインストール
 ```
-% sudo apt install libblas-dev liblapack-dev
+% sudo apt install git make patch libblas-dev liblapack-dev
 ```
-- CentOS: 以下のパッケージをインストール
+- CentOS7: 以下のパッケージをインストール
 ```
-% sudo yum install epel-release atlas-devel lapack-devel blas-devel
+% sudo yum install git make patch epel-release atlas-devel lapack-devel blas-devel
+```
+- AlmaLinux 8: 以下のパッケージをインストール
+```
+% sudo dnf install install git make patch
+% sudo dnf install --enablerepo=powertools install lapack-devel blas-devel
 ```
 
 #### 1.2 PARDISO(Intel-MKL)のインストール(Optional)
@@ -33,6 +38,8 @@ Intelの公式サイトの手順にてインストールする。
 ```
 % sudo yum install exodusii exodusii-devel
 ```
+
+- AlmaLinux 8: RPMパッケージなし
 
 #### 1.4 preCICEインストール(Optional)
 [preCICE公式の手順](https://github.com/precice/precice/wiki/Building:-Using-CMake)にてインストールする。

@@ -9,14 +9,19 @@ or SX-Aurora suport by configuration.
 
 ## Build
 ### 1. Install dependent package
-#### 1.1 Install BLAS/LAPACK \[Required\]
+#### 1.1 Install build tools and BLAS/LAPACK \[Required\]
 - Ubuntu: Install following packages
 ```
-% sudo apt install libblas-dev liblapack-dev
+% sudo apt install git make patch libblas-dev liblapack-dev
 ```
 - CentOS: Install following packages
 ```
-% sudo yum install epel-release atlas-devel lapack-devel blas-devel
+% sudo yum install git make patch epel-release atlas-devel lapack-devel blas-devel
+```
+- AlmaLinux 8: Install following packages
+```
+% sudo dnf install install git make patch
+% sudo dnf install --enablerepo=powertools install lapack-devel blas-devel
 ```
 
 #### 1.2 Install PARDISO(Intel-MKL) \[Optional\]
@@ -33,6 +38,7 @@ Install Intel-MKL packages by following documents.
 ```
 % sudo yum install exodusii exodusii-devel
 ```
+- AlmaLinux 8: No RPM packages
 
 #### 1.4 Install preCICE \[Optional\]
 Install preCICE by [instruction on the preCICE official site](https://github.com/precice/precice/wiki/Building:-Using-CMake).
