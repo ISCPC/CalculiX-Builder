@@ -20,8 +20,8 @@ or SX-Aurora suport by configuration.
 ```
 - AlmaLinux 8: Install following packages
 ```
-% sudo dnf install install git make patch
-% sudo dnf install --enablerepo=powertools install lapack-devel blas-devel
+% sudo dnf install git make patch
+% sudo dnf install --enablerepo=powertools lapack-devel blas-devel
 ```
 
 #### 1.2 Install PARDISO(Intel-MKL) \[Optional\]

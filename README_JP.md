@@ -20,8 +20,8 @@
 ```
 - AlmaLinux 8: 以下のパッケージをインストール
 ```
-% sudo dnf install install git make patch
-% sudo dnf install --enablerepo=powertools install lapack-devel blas-devel
+% sudo dnf install git make patch
+% sudo dnf install --enablerepo=powertools lapack-devel blas-devel
 ```
 
 #### 1.2 PARDISO(Intel-MKL)のインストール(Optional)
