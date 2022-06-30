@@ -1,5 +1,5 @@
 diff --git a/src/Makefile_MT b/src/Makefile_MT
-index 7ab409a..db67703 100755
+index a5c72c6..5e05c8e 100755
 --- a/src/Makefile_MT
 +++ b/src/Makefile_MT
 @@ -6,7 +6,7 @@
@@ -11,7 +11,7 @@ index 7ab409a..db67703 100755
  
  WITH_EXODUSII = false
  WITH_MKL = true
-@@ -25,7 +25,7 @@ CFLAGS+= -I $(LIB_PATH)/ARPACK -DARPACK
+@@ -24,7 +24,7 @@ CFLAGS+= -I $(LIB_PATH)/ARPACK -DARPACK
  
  #SPOOLES
  #CFLAGS+= -I /home/dalab/CalculixBuild/SPOOLES.2.2 -DSPOOLES
@@ -20,7 +20,7 @@ index 7ab409a..db67703 100755
  
  #BLAS and LAPACK
  LDFLAGS= -llapack -lblas
-@@ -87,8 +87,8 @@ OCCXMAIN = $(SCCXMAIN:.c=.o)
+@@ -84,8 +84,8 @@ OCCXMAIN = $(SCCXMAIN:.c=.o)
  
  LIBS = \
         $(LIB_PATH)/ARPACK/libarpack_INTEL.a \
@@ -29,5 +29,5 @@ index 7ab409a..db67703 100755
 +       $(LIB_PATH)/SPOOLES/MT/src/spoolesMT.a \
 +       $(LIB_PATH)/SPOOLES/spooles.a
  
- all: ccx_2.18_MT
+ all: ccx_2.19_MT
  
