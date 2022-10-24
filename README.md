@@ -26,7 +26,7 @@ or SX-Aurora suport by configuration.
 
 #### 1.2 Install PARDISO(Intel-MKL) \[Optional\]
 Now, Intel-MKL is a part of Intel® oneAPI Base Toolkit.
-Please install from [Get the Intel® oneAPI Base Toolkit][https://www.intel.com/content/www/us/en/developer/tools/oneapi/base-toolkit-download.html]
+Please install from [Get the Intel® oneAPI Base Toolkit](https://www.intel.com/content/www/us/en/developer/tools/oneapi/base-toolkit-download.html)
 
 #### 1.3 Install ExodusII \[Optional\]
 - Ubuntu: Install following packages
