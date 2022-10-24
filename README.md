@@ -25,9 +25,8 @@ or SX-Aurora suport by configuration.
 ```
 
 #### 1.2 Install PARDISO(Intel-MKL) \[Optional\]
-Install Intel-MKL packages by following documents.
-- apt(Debian, Ubuntu, Linux Mint, ...): [Installing Intel® Performance Libraries and Intel® Distribution for Python Using APT Repository](https://software.intel.com/content/www/us/en/develop/articles/installing-intel-free-libs-and-python-apt-repo.html)
-- rpm(RedHat, CentOS, ...): [Installing Intel® Performance Libraries and Intel® Distribution for Python Using YUM Repository](https://software.intel.com/content/www/us/en/develop/articles/installing-intel-free-libs-and-python-yum-repo.html)
+Now, Intel-MKL is a part of Intel® oneAPI Base Toolkit.
+Please install from [Get the Intel® oneAPI Base Toolkit][https://www.intel.com/content/www/us/en/developer/tools/oneapi/base-toolkit-download.html]
 
 #### 1.3 Install ExodusII \[Optional\]
 - Ubuntu: Install following packages
@@ -38,7 +37,7 @@ Install Intel-MKL packages by following documents.
 ```
 % sudo yum install exodusii exodusii-devel
 ```
-- AlmaLinux 8: No RPM packages
+- AlmaLinux 8/RockyLinux 8: No RPM packages
 
 #### 1.4 Install preCICE \[Optional\]
 Install preCICE by [instruction on the preCICE official site](https://github.com/precice/precice/wiki/Building:-Using-CMake).

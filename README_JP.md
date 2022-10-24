@@ -25,9 +25,8 @@
 ```
 
 #### 1.2 PARDISO(Intel-MKL)のインストール(Optional)
-Intelの公式サイトの手順にてインストールする。
-- apt(Debian系:Debian, Ubuntu,Linux Mint等): [インストール手順(英文)](https://software.intel.com/content/www/us/en/develop/articles/installing-intel-free-libs-and-python-apt-repo.html)
-- rpm(RedHat系:RedHat, CentOS等): [インストール手順(英文)](https://software.intel.com/content/www/us/en/develop/articles/installing-intel-free-libs-and-python-yum-repo.html)
+現在Intel-MKLは、Intel® oneAPI Base Toolkit の一部として提供されています。
+[Get the Intel® oneAPI Base Toolkit][https://www.intel.com/content/www/us/en/developer/tools/oneapi/base-toolkit-download.html]よりインストールしてください。
 
 #### 1.3 ExodusIIのインストール(Optional)
 - Ubuntu: 以下のパッケージをインストール
