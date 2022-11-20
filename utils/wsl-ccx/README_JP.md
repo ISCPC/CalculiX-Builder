@@ -1,4 +1,4 @@
-## 概要
+### 概要
 wsl-ccxは、PrePoMaxのソルバとしてWSL上で動作するCalculiX-ccxを使用するためのサンプルスクリプト群です。
 また、応用例としてWSL経由でクラウド上にある外部の計算サーバ上のCalculiX-ccxを使用する機能も追加してあります。
 wsl-ccxは以下の3つのコンポーネントからなります。
@@ -15,8 +15,8 @@ wsl-ccxは以下の3つのコンポーネントからなります。
    ネットワーク経由で外部の計算サーバに接続する際に、外部サーバ側に置くスクリプト。
    本スクリプトは、外部に設置したSX-Aurora TSUBASA上のVE対応版CalculiXを呼び出す例。
 
-## 使用方法
-### 【使用方法1】WSL2上のCalculiX-ccxを使用する 
+### 使用方法
+【使用方法1】WSL2上のCalculiX-ccxを使用する 
 1. Windowsの任意の場所に、client/wsl-ccx.batを配置。PrePoMaxの"Tools"->"CalculiX"で以下の設定行う。
   - "CalculiX: Executable"に、wsl-ccx.batをフルパスで指定
   - (Optional)実行時の使用CPUコア数を指定(デフォルトは1)
@@ -25,7 +25,7 @@ wsl-ccxは以下の3つのコンポーネントからなります。
 
 2. server/ccx_wrapper.shをWSL2上の ~/local/bin内に配置。
 
-### 【使用方法2】外部のサーバ(例えばSX-Aurora TSUBASA)上のCaluliX-ccxを使用する
+【使用方法2】外部のサーバ(例えばSX-Aurora TSUBASA)上のCaluliX-ccxを使用する
 1. 外部のサーバにwsl2からパスワードなしでssh接続できることを確認する。
 2. Windowsの任意の場所に、client/wsl-ccx.batを配置。PrePoMaxの"Tools"->"CalculiX"で以下の設定行う。
   - "CalculiX: Executable"に、wsl-ccx.batをフルパスで指定
@@ -44,8 +44,8 @@ wsl-ccxは以下の3つのコンポーネントからなります。
    - (PARDISOを使用する場合)Intel-MKLのライブラリパス
 
 
-## 参考情報
-### 1. パスワードなしsshでログインできるようにする方法
+### 参考情報
+1. パスワードなしsshでログインできるようにする方法
 WSL2環境から、外部サーバへパスワードなしで接続するための設定です。
 ssh
 
@@ -60,7 +60,7 @@ $ ssh-copy-id <外部サーバのホスト名orIPアドレス>
 WSL環境上の~/.ssh/id_rsa.pub を内容を、外部サーバ上の~/.ssh/authorized_keysに
 追記して下さい。
 
-### 2. 外部サーバがゲートウェイサーバ経由での接続が必要な場合
+2. 外部サーバがゲートウェイサーバ経由での接続が必要な場合
 SSHポートフォワーディングを使用することで、ゲートウェイ越しの外部サーバに直接接続できるようにすることが可能です。設定例を以下に示します。
 
 1) WSL2のターミナルから、以下のコマンドでポートフォワーディングを確立します。
