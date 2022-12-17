@@ -15,7 +15,7 @@ Download vesolver library fron following URL and extract it on ~/local.
 Refer [README.md](https://github.com/ISCPC/CalculiX-Builder/blob/develop/README.md) for build.
 
 SX-Aurora specific options:
-- `WITH_AURORA={ture|false}`     : solvers using SX-Aurora VE (SOLVER=SX-AUR_*)
+- `WITH_AURORA={ture|false}`     : solvers using SX-Aurora VE (SOLVER=SXAT_*)
 - `VESOLVER_PATH=<Path to vesolver>` : path to vesolver installed at 2.1. (default: ~/local)
 
 By default, CalculiX-Builder install modules into following path.
@@ -30,8 +30,8 @@ on your Windows PC such as PrePoMax. Please refer utils/rccx/README.
 Ccx for SX-Aurora, built with WITH_AURORA=true, supports addtional solvers
 which uses VE(Vector Engine) on SX-Aurora TSUBASA as follows. 
 
-- SX-AUR_HS: Use [HeteroSolver](https://www.hpc.nec/documents/sdk/SDK_NLC/UsersGuide/heterosolver/c/ja/index.html) which is direct methods solver tuned for SX-Aurora TSUBASA.
-- SX-AUR_SCALING: Use iterative solver tuned for SX-Aurora TSUBASA. This solver uses the same algorithm with ITERATIVESCALING solver impletened on the original ccx. But by using [SBLAS](https://www.hpc.nec/documents/sdk/SDK_NLC/UsersGuide/sblas/c/ja/index.html) library on VE, outstanding performance improvement acheived.
+- SXAT_HS: Use [HeteroSolver](https://www.hpc.nec/documents/sdk/SDK_NLC/UsersGuide/heterosolver/c/ja/index.html) which is direct methods solver tuned for SX-Aurora TSUBASA.
+- SXAT_SCALING: Use iterative solver tuned for SX-Aurora TSUBASA. This solver uses the same algorithm with ITERATIVESCALING solver impletened on the original ccx. But by using [SBLAS](https://www.hpc.nec/documents/sdk/SDK_NLC/UsersGuide/sblas/c/ja/index.html) library on VE, outstanding performance improvement acheived.
 
 
 ## 4. Usage
@@ -51,19 +51,19 @@ Example)
 There are two ways to use solvers for SX-Aurora TSUBASA.
  
 - By editing .inp file
-Add SOLVER=SX-AUR_HS of SX-AUR_SCALING option to procedure description.
+Add SOLVER=SXAT_HS of SXAT_SCALING option to procedure description.
 
 Example） 
 ```
 ** Step-1 ++++++++++++++++++++++++++++++++++++++++++++++++++
 *Step
-*Static, SOLVER=SX-AUR_HS
+*Static, SOLVER=SXAT_HS
 ```
 
 - By using environment variable
-Set SX-AUR_HS or SX-AUR_SCALING to CCX_DEFAULT_SOLVER
+Set SXAT_HS or SXAT_SCALING to CCX_DEFAULT_SOLVER
 
 Example） 
 ```
-% export CCX_DEFAULT_SOLVER=SX-AUR_SCALING
+% export CCX_DEFAULT_SOLVER=SXAT_SCALING
 ```
