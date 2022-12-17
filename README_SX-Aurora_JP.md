@@ -7,9 +7,9 @@
 vesolverを以下からダウンロードして、任意のディレクトリに展開します。
 (以下の例では、~/local配下に展開)
 ```
-% wget https://github.com/ISCPC/vesolver/releases/download/Release_20220212_beta/vesolver_20220212_beta.tar.gz
+% wget https://github.com/ISCPC/vesolver/releases/download/Release_20221217_beta/vesolver_20221217_beta.tar.gz
 % cd ~/local
-% tar xf <Path to vesolver>/vesolver_20220212_beta.tar.gz
+% tar xf <Path to vesolver>/vesolver_20221217_beta.tar.gz
 ```
 
 ### 2.2 VEsolver対応版ccxのインストール
@@ -20,7 +20,7 @@ SX-Aurora固有のオプションは以下になります。
 - `VESOLVER_PATH=<Path to vesolver>` : 2.1でvesolverを展開したPATH(デフォルト:~/local)
 
 作成されたモジュールは以下にインストールされます。
-- ccx_2.18_MT: $(PREFIX)/bin/ccx_2.18_MT
+- ccx_2.19_MT: $(PREFIX)/bin/ccx_2.19_MT
 
 
 ### 2.3 rccxのインストール(Optional)
