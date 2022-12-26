@@ -10,11 +10,17 @@ echo "CCX_REMOTE_WORK_DIR=$CCX_REMOTE_WORK_DIR"
 echo "CCX_WORK_DIR=$CCX_WORK_DIR"
 echo "CCX_DEFAULT_SOLVER=$CCX_DEFAULT_SOLVER"
 
-cd $CCX_WORK_DIR
+cd "$CCX_WORK_DIR"
 
 if [ "${CCX_REMOTE_HOST}" = "" ]
 then
-    export LD_LIBRARY_PATH=/opt/intel/oneapi/mkl/latest/lib/intel64:${LD_LIBRARY_PATH}
+    if [ -d /opt/intel/oneapi ]
+    then
+        MKL_PATH=/opt/intel/oneapi/mkl/latest/lib/intel64:/opt/intel/oneapi/compiler/latest/linux/compiler/lib/intel64_lin
+    else
+        MKL_PATH=/opt/intel/mkl/lib/intel64_lin:/opt/intel/lib/intel64_lin
+    fi
+    export LD_LIBRARY_PATH=${MKL_PATH}:${LD_LIBRARY_PATH}
     ${HOME}/local/bin/ccx_2.19_MT $1
 else
     if [ "${CCX_REMOTE_PORT}" != "" ]
