@@ -34,7 +34,7 @@ else
     fi
     echo "Sending data to ${CCX_REMOTE_DIR}..."
     rsync -e "ssh ${SSH_OPTIONS}" * ${CCX_REMOTE_HOST}:${CCX_REMOTE_DIR}
-    ssh -p ${CCX_REMOTE_PORT} ${CCX_REMOTE_HOST} OMP_NUM_THREADS=${OMP_NUM_THREADS} CCX_REMOTE_DIR=${CCX_REMOTE_DIR} CCX_DEFAULT_SOLVER=${CCX_DEFAULT_SOLVER} ./local/bin/ccx_sxat.sh $1
+    ssh ${SSH_OPTIONS} ${CCX_REMOTE_HOST} OMP_NUM_THREADS=${OMP_NUM_THREADS} CCX_REMOTE_DIR=${CCX_REMOTE_DIR} CCX_DEFAULT_SOLVER=${CCX_DEFAULT_SOLVER} ./local/bin/ccx_sxat.sh $1
     echo "Collecting result..."
     rsync -e "ssh ${SSH_OPTIONS}" ${CCX_REMOTE_HOST}:${CCX_REMOTE_DIR}/* .
 fi

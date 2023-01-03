@@ -27,7 +27,8 @@ wsl-ccxは以下の3つのコンポーネントからなります。
 
 #### 【使用方法2】外部のサーバ(例えばSX-Aurora TSUBASA)上のCaluliX-ccxを使用する
 1. 外部のサーバにwsl2からパスワードなしでssh接続できることを確認する。
-2. Windowsの任意の場所に、client/wsl-ccx.batを配置。PrePoMaxの"Tools"->"CalculiX"で以下の設定行う。
+2. WSL2および外部サーバにrsyncがインストールされていることを確認する。
+3. Windowsの任意の場所に、client/wsl-ccx.batを配置。PrePoMaxの"Tools"->"CalculiX"で以下の設定行う。
   - "CalculiX: Executable"に、wsl-ccx.batをフルパスで指定
   - (Optional)実行時の使用CPUコア数を指定(デフォルトは1)
   - "Parallization: Environment variables" に以下のパラメータを設定する
@@ -36,8 +37,8 @@ wsl-ccxは以下の3つのコンポーネントからなります。
       CCX_REMOTE_PORT: 外部サーバへのssh接続時のポート番号を指定する(optional)
       CCX_REMOTE_DIR: 外部サーバ上での作業ディレクトリを指定する
       CCX_DEFAULT_SOLVER: デフォルトで使用するソルバを指定する(optional)
-3. server/ccx_wrapper.shをWSL2上の ~/local/bin内に配置。
-4. server/ccx_sxat.shを外部のサーバ上の~/local/bin内に配置。
+4. server/ccx_wrapper.shをWSL2上の ~/local/bin内に配置。
+5. server/ccx_sxat.shを外部のサーバ上の~/local/bin内に配置。
    ccx_sxat.shの内容は、外部サーバでのccx動作環境によって適宜修正してください。
    - 使用するccxのバージョン
    - (SX-Aurara TSUBASAの場合)使用するSDKのバージョン
