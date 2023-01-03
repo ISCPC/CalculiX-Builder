@@ -21,7 +21,9 @@ wsl-ccxは以下の3つのコンポーネントからなります。
   - "CalculiX: Executable"に、wsl-ccx.batをフルパスで指定
   - (Optional)実行時の使用CPUコア数を指定(デフォルトは1)
   - (Optional)"Parallelization: Environment variables"に以下のパラメータを設定する。
-      WSL_NAME: 使用するWSL2インスタンス名を指定(省略時にはデフォルトインスタンス使用)
+      |環境変数| 説明 |
+      ----|----
+      |WSL_NAME| 使用するWSL2インスタンス名を指定(省略時にはデフォルトインスタンス使用)|
 
 2. server/ccx_wrapper.shをWSL2上の ~/local/bin内に配置。
 
@@ -32,11 +34,14 @@ wsl-ccxは以下の3つのコンポーネントからなります。
   - "CalculiX: Executable"に、wsl-ccx.batをフルパスで指定
   - (Optional)実行時の使用CPUコア数を指定(デフォルトは1)
   - "Parallization: Environment variables" に以下のパラメータを設定する
-      WSL_NAME: 使用するWSL2インスタンス名を指定(省略時にはデフォルトインスタンス使用)
-      CCX_REMOTE_HOST: 外部サーバのホスト名を user@hostname の形式で指定する。
-      CCX_REMOTE_PORT: 外部サーバへのssh接続時のポート番号を指定する(optional)
-      CCX_REMOTE_DIR: 外部サーバ上での作業ディレクトリを指定する
-      CCX_DEFAULT_SOLVER: デフォルトで使用するソルバを指定する(optional)
+      |環境変数| 説明 |
+      ----|----
+      |WSL_NAME| 使用するWSL2インスタンス名を指定(省略時にはデフォルトインスタンス使用)|
+      |CCX_REMOTE_HOST| 外部サーバのホスト名を user@hostname の形式で指定する。|
+      |CCX_REMOTE_PORT| 外部サーバへのssh接続時のポート番号を指定する(optional)|
+      |CCX_REMOTE_DIR| 外部サーバ上での作業ディレクトリを指定する|
+      |CCX_DEFAULT_SOLVER| デフォルトで使用するソルバを指定する(optional)|
+
 4. server/ccx_wrapper.shをWSL2上の ~/local/bin内に配置。
 5. server/ccx_sxat.shを外部のサーバ上の~/local/bin内に配置。
    ccx_sxat.shの内容は、外部サーバでのccx動作環境によって適宜修正してください。

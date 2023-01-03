@@ -20,8 +20,10 @@ wsl-ccx is consist of following three componets.
 1. Put client/wsl-ccx.bat to arbitary place. Set following parameters in "Tools"->"CalculiX" on PrePoMax.
   - Set the path to wsl-ccx.bat by full-path in "CalculiX: Executable"
   - (Optional)Set "Number of preocesses"(default:1)
-  - (Optional)Add the following variable in "Parallelization: Environment variables" 
-      WSL_NAME: WSL instance name to use(If not set, the default instance is used.)
+  - (Optional)Add the following variable in "Parallelization: Environment variables"  
+      |Environment Variable| Description |
+      ----|----
+      |WSL_NAME| WSL instance name to use(If not set, the default instance is used.)|
 
 2. Put server/ccx_wrapper.sh into ~/local/bin on WSL.
 
@@ -32,11 +34,14 @@ wsl-ccx is consist of following three componets.
   - Set the path to wsl-ccx.bat by full-path in "CalculiX: Executable"
   - (Optional)Set "Number of preocesses"(default:1)
   - Add the following variable in "Parallelization: Environment variables" 
-      WSL_NAME: WSL instance name to use(If not set, the default instance is used.)
-      CCX_REMOTE_HOST: Hostname of external server (Set as user@hostname format)
-      CCX_REMOTE_PORT: Port number for SSH connection to external server(optional)
-      CCX_REMOTE_DIR: Work directory on external server
-      CCX_DEFAULT_SOLVER: Default selver name(optional)
+      |Environment Variable| Description |
+      ----|----
+      |WSL_NAME| WSL instance name to use(If not set, the default instance is used.)|
+      |CCX_REMOTE_HOST| Hostname of external server (Set as user@hostname format)|
+      |CCX_REMOTE_PORT| Port number for SSH connection to external server(optional)|
+      |CCX_REMOTE_DIR| Work directory on external server|
+      |CCX_DEFAULT_SOLVER| Default selver name(optional)|
+   
 4. Put server/ccx_wrapper.sh into ~/local/bin on WSL2.
 5. Put server/ccx_sxat.sh into ~/local/bin on external server.
    Please fix ccx_sxat.sh for the environment of your external server such as:
