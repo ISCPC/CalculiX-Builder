@@ -6,9 +6,9 @@ This document describes how to use CalculiX on SX-Aurora TSUBASA.
 ### 2.1 Install vesolver
 Download vesolver library fron following URL and extract it on ~/local.
 ```
-% wget https://github.com/ISCPC/vesolver/releases/download/Release_20221217_beta/vesolver_20221217_beta.tar.gz
+% wget https://github.com/ISCPC/vesolver/releases/download/Release_20240224_beta/vesolver_20240224_beta.tar.gz
 % cd ~/local
-% tar xf <Path to vesolver>/vesolver_20221217_beta.tar.gz
+% tar xf <Path to vesolver>/vesolver_20240224_beta.tar.gz
 ```
 
 ### 2.2 Build and install ccx with SX-Aurora VE support
@@ -19,7 +19,7 @@ SX-Aurora specific options:
 - `VESOLVER_PATH=<Path to vesolver>` : path to vesolver installed at 2.1. (default: ~/local)
 
 By default, CalculiX-Builder install modules into following path.
-- ccx_2.19_MT: $(PREFIX)/bin/ccx_2.19_MT
+- ccx_2.21_MT: $(PREFIX)/bin/ccx_2.21_MT
 
 ### 2.3 Install rccx \[Optional\]
 Remote ccx(rccx) enables you to use ccx on SX-Aurora TSUBASA from the applications
